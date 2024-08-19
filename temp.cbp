@@ -1,0 +1,134 @@
+#include"global.h"
+#define Wait "W"   //等待状态
+#define Run "R"    //运行状态
+#define Finish "F" //完成状态
+
+void sortQue(Que *q, int N) //对队列中进程排序
+{
+        struct PCB pcb[N], temp;
+        for (int i = 0; i < N; i++)
+        {
+                pcb[i] = DeQue(q);
+        }
+        for (int i = 0; i < N; i++)
+        {
+                for (int j = 0; j < N; j++)
+                {
+                        if (pcb[j].priority < pcb[j + 1].priority)
+                        {
+                                temp = pcb[j + 1];
+                                pcb[j + 1] = pcb[j];
+                                pcb[j] = temp;
+                        }
+                }
+        }
+        for (int i = 0; i < N; i++)
+        {
+                EnQue(q, pcb[i]);
+        }
+}
+void printQue(Que *q, int N)
+{
+      struct PCB pcb[N], temp;
+        for (int i = 0; i < N; i++)
+        {
+                pcb[i] = DeQue(q);
+        } 
+        output(pcb,N); 
+}
+int main()
+{
+        int N, n;
+        int totaltime = 0; //初始时间默认为0
+        int begintime = 0;
+        Que *readyQue, *runQue, *BlockQue, *FinishQue; //准备队列、运行队列、阻塞队列、完成队列
+        InitQue(&readyQue), InitQue(&runQue), InitQue(&BlockQue), InitQue(&FinishQue);
+        printf("动态高优先权调度算法\n");
+        printf("输入需要处理作业的总数：");
+        scanf("%d", &N);
+        struct PCB temp; //用来输出的进程作业
+        printf("\n请输入每个时间单位优先级的变化：");
+        scanf("%d", &n);
+        input(pcb, N);
+        sort(pcb, N);
+        for (int i = 0; i < N; i++)
+        {
+                EnQue(readyQue, pcb[i]); //排序后进入准备队列
+        }
+        while (!QueEmpty(readyQue) || !QueEmpty(BlockQue))
+        {
+                totaltime++;
+                if (!QueEmpty(BlockQue))
+                {
+                        if (Get(readyQue).priority > Get(BlockQue).priority)
+                        {
+                                temp = DeQue(readyQue);
+                                temp.start_time = begintime;
+                                temp.run_time++;
+                                strcmp(temp.status, "R");
+                                if (temp.arrive_time == temp.run_time)
+                                {
+                                        temp.finish_time = totaltime;
+                                        temp.turnaround_time = temp.finish_time - temp.arrive_time;
+                                        temp.weighted_turnaround_time = temp.turnaround_time * 1.0 / temp.service_time;
+                                        strcmp(temp.status, "F");
+                                        EnQue(FinishQue, temp);
+                                }
+                                else
+                                {
+                                        temp.priority = temp.priority - 1;
+                                        strcmp(temp.status, "W");
+                                        EnQue(BlockQue, temp);
+                                        sortQue(BlockQue,N);
+                                }
+                        }
+                        else
+                        {
+                                temp=DeQue(BlockQue);
+                                temp.start_time = begintime;
+                                temp.run_time++;
+                                strcmp(temp.status, "R");
+                                if (temp.arrive_time == temp.run_time)
+                                {
+                                        temp.finish_time = totaltime;
+                                        temp.turnaround_time = temp.finish_time - temp.arrive_time;
+                                        temp.weighted_turnaround_time = temp.turnaround_time * 1.0 / temp.service_time;
+                                        strcmp(temp.status, "F");
+                                        EnQue(FinishQue, temp);
+                                }
+                                else
+                                {
+                                        temp.priority = temp.priority - 1;
+                                        strcmp(temp.status, "W");
+                                        EnQue(BlockQue, temp);
+                                        sortQue(BlockQue,N);
+                                }
+                        }
+                        
+                }
+                else
+                {
+                        temp = DeQue(readyQue);
+                        temp.start_time = begintime;
+                        temp.run_time++;
+                        strcmp(temp.status, "R");
+                        if (temp.arrive_time == temp.run_time)
+                        {
+                                temp.finish_time = totaltime;
+                                temp.turnaround_time = temp.finish_time - temp.arrive_time;
+                                temp.weighted_turnaround_time = temp.turnaround_time * 1.0 / temp.service_time;
+                                strcmp(temp.status, "F");
+                                EnQue(FinishQue, temp);
+                        }
+                        else
+                        {
+                                temp.priority = temp.priority - 1;
+                                strcmp(temp.status, "W");
+                                EnQue(BlockQue, temp);
+                                sortQue(BlockQue,N);
+                        }
+                }
+        }
+       printQue(FinishQue,N);
+        return 0;
+}

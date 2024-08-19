@@ -1,0 +1,24 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex 2018.4.16)  15 MAY 2019 10:02
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**\nonstopmode\input /Users/songxin/教师相关/教学/算法分析与设计/2
+019/Lab/lab1/lab1
+
+! Emergency stop.
+<to be read again> 
+                   \protect 
+<*> \nonstopmode\input /Users/songxin/教
+                                         师相关/教学/算法分析与设...
+*** (job aborted, file error in nonstop mode)
+
+ 
+Here is how much of TeX's memory you used:
+ 4 strings out of 492650
+ 116 string characters out of 6129648
+ 56397 words of memory out of 5000000
+ 3989 multiletter control sequences out of 15000+600000
+ 3640 words of font info for 14 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 7i,0n,4p,103b,8s stack positions out of 5000i,500n,10000p,200000b,80000s
+No pages of output.

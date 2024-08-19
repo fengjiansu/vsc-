@@ -1,0 +1,90 @@
+% Created 2019-04-23 Tue 16:54
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage[UTF8, heading = false, scheme = plain]{ctex}
+\tolerance=1000
+\author{宋昕}
+\date{\today}
+\title{lab1}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 25.1.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{lab1 分治法实验}
+\label{sec-1}
+\subsection{任务一}
+\label{sec-1-1}
+编写BubbleSort.c和MergeSort.c，利用提供的数据集，分别记录不同大小数组的排序时间，并根据规模和时间画出两个算法的实际测量时间复杂度。
+\subsection{任务二 (计算机算法设计与分析，第五版) P41开始，算法实现题目}
+\label{sec-1-2}
+\subsubsection{2-1 众数问题（要求用分治法，即递归的方法完成）}
+\label{sec-1-2-1}
+第一步：对集合（数组）中的元素进行排序
+第二步：设计一个递归函数Mode，输入参数是排序过的一维数组以及数组的起点和终点，返回值是一维数组的众数
+第三步：设计main函数，并测试
+\begin{verbatim}
+int Mode(int a[], int i, int j) {
+  if (i == j) return 1;
+  
+  int m = (i + j) / 2;
+
+
+}
+\end{verbatim}
+\subsubsection{2-3 半数集问题}
+\label{sec-1-2-2}
+第一步：理解问题，用小规模输入进行模拟演算，确保理解题意
+第二步：进行递归式思考，分析问题的输入和输出，原问题的输入/出是什么，子问题的输入/出是什么，以及原问题分解为几个子问题，基本情况的条件和值是什么？
+第三步：尝试写出计算半数集的递推式，递推式中的多个子问题会用到求和公式Σ，要明确求和的上、下边界
+第四步：把递推公式改写为程序代码HalfSet.c
+
+\begin{verbatim}
+cat HalfSet.c
+\end{verbatim}
+
+\subsubsection{2-5 有重复元素的排列问题}
+\label{sec-1-2-3}
+第一步：与无重复元素的排列问题作比较，找到重复发生的环节，然后设置去重的条件
+第二步：编码实现
+\begin{verbatim}
+cat PermRemove.c
+\end{verbatim}
+\subsubsection{2-6 字典序问题}
+\label{sec-1-2-4}
+    第一步：观察无重复全排列的次序（用课堂上的讲解的算法）和字典序次序的差异，进而发现字典序和的差异在于从序列中选出一个打头元素后，当前打头元素该放在什么位置？课堂算法的做法是当前打头元素和选出的新打头元素交换位置，而字典序是把选出的打头元素放在当前打头元素之前，选出打头元素后，其空下的位置由后续元素向前补充。因此需要修改全排列生成算法中的Swap功能。
+第二步：编码实现第一步的构思
+\begin{verbatim}
+cat DictOrder.c
+\end{verbatim}
+第三步：分析推算2, 6, 4, 5, 8, 1, 7, 3序列的次序（应为8228），从推算过程中看看能否写成一个递归式：\[ f(i, n, seq) = f(i + 1, n, seq) + (order(A[i], seq) - 1) * (n - 1)!\], if \[i + 1 = n\] ,then \[f(i, n, seq) = 1 \]
+\subsubsection{2-7 集合划分问题（1）}
+\label{sec-1-2-5}
+
+\subsubsection{2-8 集合划分问题（2）}
+\label{sec-1-2-6}
+\subsubsection{2-9 双色汉诺塔问题}
+\label{sec-1-2-7}
+双色汉诺塔问题和单色汉诺塔问题在输入规模一样的情况下，挪动盘子的次数是一样的。但过程却是不同的，单色汉诺塔有两个子问题，双色汉诺塔有四个子问题，双色公式\[\]
+\subsubsection{2-11 整数因子分解问题}
+\label{sec-1-2-8}
+% Emacs 25.1.1 (Org mode 8.2.10)
+\end{document}
